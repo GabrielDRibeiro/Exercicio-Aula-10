@@ -4,7 +4,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import TableRow, { tableRowClasses} from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -21,11 +21,16 @@ import { styled } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
+    common: {
+      grey: '767676',
+    },
+
     primary: {
       main: '#b30e0e',
     },
     secondary: {
-      main: '#D9D223',
+      main: '#e1e1e1',
+      cinza: '#222222',
     },
   },
 
@@ -105,19 +110,12 @@ const ListarTarefa = () => {
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
       color: theme.palette.common.white,
+      fontSize: 20,
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
-    },
-  }));
-  
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    '&:last-child td, &:last-child th': {
-      border: 0,
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.cinza,
     },
   }));
 
@@ -147,7 +145,7 @@ const ListarTarefa = () => {
                 </TableHead>
                 <TableBody>
                   {tarefas.map((row, indice) => (
-                    <StyledTableRow
+                    <TableRow
                       key={indice}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
@@ -168,7 +166,7 @@ const ListarTarefa = () => {
                       <StyledTableCell align="center">
                         <Button variant="contained" color="error" onClick={() => handleDeletar(row.idTarefa)}><DeleteIcon fontSize="small" /></Button>
                       </StyledTableCell>
-                    </StyledTableRow>
+                    </TableRow>
                   ))}
                 </TableBody>
               </Table>
